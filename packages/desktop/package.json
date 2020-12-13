@@ -35,15 +35,15 @@
     "appId": "com.recordably",
     "productName": "recordably",
     "directories": {
-      "buildResources": "src/assets",
+      "buildResources": "icons",
       "output": "build"
     },
     "mac": {
       "category": "public.app-category.developer-tools",
-      "icon": "icons/icon.png"
+      "icon": "icon.png"
     },
     "win": {
-      "icon": "icons/icon.ico",
+      "icon": "icon.ico",
       "artifactName": "${productName}-Setup-${version}.${ext}",
       "target": [
         "nsis",
@@ -54,7 +54,7 @@
       "desktop": {
         "MimeType": "x-scheme-handler/recordably;"
       },
-      "icon": "icons/icon.png",
+      "icon": "icon.png",
       "target": [
         "AppImage",
         "deb"

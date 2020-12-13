@@ -2,7 +2,7 @@ const electron = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
 
-const { app, Tray, Menu, globalShortcut, ipcMain } = electron
+const { app, Tray, Menu, globalShortcut, ipcMain, nativeImage } = electron
 
 const BrowserWindow = electron.BrowserWindow
 
@@ -10,8 +10,11 @@ let window
 let tray
 
 const createTray = () => {
-  const iconPath = path.join(__dirname, '../src/assets/icons/icon.png')
-  tray = new Tray(iconPath)
+  const trayIcon = path.join(__dirname, '../icons/icon.png')
+
+  console.log(path.join(__dirname, '../icons/icon.png'))
+
+  tray = new Tray(nativeImage.createFromPath(trayIcon))
 
   const contextMenu = Menu.buildFromTemplate([
     {
@@ -56,7 +59,7 @@ const createWindow = () => {
   window.loadURL(
     isDev
       ? 'http://localhost:3006'
-      : `file://${path.join(__dirname, '../build/index.html')}`
+      : `file://${path.join(app.getAppPath(), 'build/index.html')}`
   )
 
   // window.webContents.openDevTools({ detached: true })
