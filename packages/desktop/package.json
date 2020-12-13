@@ -33,10 +33,17 @@
   },
   "build": {
     "appId": "com.recordably",
-    "productName": "recordably",
+    "productName": "Recordably",
     "directories": {
       "buildResources": "icons",
       "output": "build"
+    },
+    "files": [
+      "icons"
+    ],
+    "publish": {
+      "provider": "github",
+      "releaseType": "draft"
     },
     "mac": {
       "category": "public.app-category.developer-tools",
