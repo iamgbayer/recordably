@@ -1,6 +1,6 @@
 <p align="center">
   <img src="" height="100" /><br/>
-  <span><b>Recordably</b>: <span>Record GIF and take screenshots of the desktop easily.</span>
+  <span><b>Recordably</b>: <span>An open-source, minimalist, screenshot and screen GIF recorder built with web technology.</span>
   <br/>
   <br/>
   <img src="https://img.shields.io/twitter/follow/Recordably?style=social"/>
