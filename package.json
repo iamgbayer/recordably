@@ -1,0 +1,22 @@
+{
+  "name": "recordably",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {},
+  "scripts": {
+    "start": "lerna run start",
+    "dev:landing": "yarn workspace @recordably/landing dev",
+    "start:landing": "yarn workspace @recordably/landing start",
+    "start:desktop": "yarn workspace @recordably/desktop start",
+    "build:landing": "yarn workspace @recordably/landing build",
+    "build:desktop": "yarn workspace @recordably/desktop build",
+    "bootstrap": "lerna bootstrap"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^3.10.5"
+  }
+}

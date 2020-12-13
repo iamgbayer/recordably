@@ -1,0 +1,93 @@
+{
+  "name": "@recordably/desktop",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/ramda": "^0.27.4",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "cross-env": "^7.0.2",
+    "jimp": "^0.14.0",
+    "blob-to-buffer": "^1.2.8",
+    "dayjs": "^1.9.7",
+    "gif-encoder-2": "^1.0.5",
+    "electron-is-dev": "^1.2.0",
+    "ramda": "^0.27.0",
+    "react": "^16.13.1",
+    "react-rnd": "^10.1.10",
+    "react-dom": "^16.13.1",
+    "react-scripts": "4.0.1",
+    "electron-devtools-installer": "^3.0.0",
+    "styled-components": "^5.1.0",
+    "styled-tools": "^1.7.1",
+    "typescript": "~3.7.2"
+  },
+  "author": {
+    "name": "Guilherme Bayer",
+    "email": "iamgbayer@gmail.com",
+    "url": "https://twitter.com/iamgbayer"
+  },
+  "build": {
+    "appId": "com.recordably",
+    "productName": "recordably",
+    "directories": {
+      "buildResources": "assets",
+      "output": "build"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "icons/icon.png"
+    },
+    "win": {
+      "icon": "icons/icon.ico",
+      "artifactName": "${productName}-Setup-${version}.${ext}",
+      "target": [
+        "nsis",
+        "msi"
+      ]
+    },
+    "linux": {
+      "desktop": {
+        "MimeType": "x-scheme-handler/recordably;"
+      },
+      "icon": "icons/icon.png",
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    }
+  },
+  "main": "public/electron.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "concurrently \"cross-env PORT=3006 BROWSER=none react-scripts start\" \"wait-on http://localhost:3006 && electron .\"",
+    "build": "react-scripts build && yarn electron-builder",
+    "test": "react-scripts test"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "electron-builder": "^22.6.1",
+    "electron": "8.2.3",
+    "wait-on": "^4.0.2"
+  }
+}
