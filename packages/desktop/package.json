@@ -22,7 +22,6 @@
     "react-rnd": "^10.1.10",
     "react-dom": "^16.13.1",
     "react-scripts": "4.0.1",
-    "electron-devtools-installer": "^3.0.0",
     "styled-components": "^5.1.0",
     "styled-tools": "^1.7.1",
     "typescript": "~3.7.2"
@@ -36,7 +35,7 @@
     "appId": "com.recordably",
     "productName": "recordably",
     "directories": {
-      "buildResources": "assets",
+      "buildResources": "src/assets",
       "output": "build"
     },
     "mac": {
@@ -85,6 +84,7 @@
     ]
   },
   "devDependencies": {
+    "eslint-config-prettier": "^6.0.0",
     "concurrently": "^5.2.0",
     "electron-builder": "^22.6.1",
     "electron": "8.2.3",

@@ -1,6 +1,6 @@
+import { IMAGE_TYPE, VIDEO_CSS } from 'configs'
 import jimp from 'jimp'
 import { useRef } from 'react'
-import { IMAGE_TYPE, VIDEO_CSS } from '../constants'
 
 export const useTakeScreenshot = ({ meta, minimize }) => {
   const video = useRef(null)

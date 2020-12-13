@@ -4,6 +4,8 @@ import styled from 'styled-components'
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
+  overflow: hidden;
+  position: relative;
 `
 
 export const Overlay = styled.div.attrs(({ width, height, top, left }) => ({

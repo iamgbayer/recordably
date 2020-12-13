@@ -1,4 +1,4 @@
-import { STATUS } from 'constants'
+import { STATUS } from 'configs'
 import {
   getIdAndSizeCurrentDisplay,
   getSourceAndUserMedia,
@@ -181,7 +181,7 @@ export const Area = () => {
         left={0}
         width="full"
         height={
-          prop('height', size) - 30 - prop('height', meta) - prop('y', meta)
+          prop('height', size) - 40 - prop('height', meta) - prop('y', meta)
         }
       />
       <Overlay

@@ -1,10 +1,6 @@
 const electron = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
-const {
-  default: installExtension,
-  REDUX_DEVTOOLS
-} = require('electron-devtools-installer')
 
 const { app, Tray, Menu, globalShortcut, ipcMain } = electron
 
@@ -44,16 +40,13 @@ const createTray = () => {
 }
 
 const createWindow = () => {
-  installExtension(REDUX_DEVTOOLS)
-    .then((name) => console.log(`Added Extension:  ${name}`))
-    .catch((err) => console.log('An error occurred: ', err))
-
   window = new BrowserWindow({
     transparent: true,
     frame: false,
     width: 1920,
     height: 1080,
     alwaysOnTop: true,
+    fullscreen: true,
     webPreferences: { nodeIntegration: true }
   })
 
@@ -66,7 +59,7 @@ const createWindow = () => {
       : `file://${path.join(__dirname, '../build/index.html')}`
   )
 
-  isDev && window.webContents.openDevTools({ detached: true })
+  // window.webContents.openDevTools({ detached: true })
 
   window.on('closed', () => (window = null))
 }

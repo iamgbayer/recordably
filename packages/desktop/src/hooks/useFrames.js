@@ -1,7 +1,7 @@
+import { FRAME_RATE, IMAGE_TYPE, MAX_LENGTH, VIDEO_CSS } from 'configs'
 import GIFEncoder from 'gif-encoder-2'
 import { isNil, prop } from 'ramda'
 import { useRef, useState } from 'react'
-import { FRAME_RATE, IMAGE_TYPE, MAX_LENGTH, VIDEO_CSS } from '../constants'
 
 const { remote } = window.require('electron')
 const fs = window.require('fs')
@@ -9,6 +9,7 @@ const { dialog, app } = remote
 
 export const useFrames = ({ meta, minimize }) => {
   const [frames, setFrames] = useState([])
+  // eslint-disable-next-line no-unused-vars
   const [timeLimit, setTimeLimit] = useState(MAX_LENGTH)
 
   const video = useRef(null)

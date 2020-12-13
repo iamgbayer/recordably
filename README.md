@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="" height="100" /><br/>
+  <img src="https://i.imgur.com/zx0YWwL.png" height="100" /><br/>
   <span><b>Recordably</b>: <span>An open-source, minimalist, screenshot and screen GIF recorder built with web technology.</span>
   <br/>
   <br/>
