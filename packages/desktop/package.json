@@ -1,5 +1,6 @@
 {
   "name": "@recordably/desktop",
+  "description": "",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -33,7 +34,7 @@
   },
   "build": {
     "appId": "com.recordably",
-    "productName": "Recordably",
+    "productName": "recordably",
     "directories": {
       "buildResources": "icons",
       "output": "build"
