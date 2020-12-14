@@ -35,12 +35,14 @@
   "build": {
     "appId": "com.recordably",
     "productName": "recordably",
+    "extends": null,
     "directories": {
       "buildResources": "icons",
-      "output": "build"
+      "output": "dist"
     },
     "files": [
-      "icons"
+      "icons",
+      "build"
     ],
     "publish": {
       "provider": "github",
