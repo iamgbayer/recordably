@@ -3,6 +3,10 @@
   "description": "",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamgbayer/recordably.git"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -96,7 +100,7 @@
   "devDependencies": {
     "eslint-config-prettier": "^6.0.0",
     "concurrently": "^5.2.0",
-    "electron-builder": "^22.6.1",
+    "electron-builder": "^22.9.1",
     "electron": "8.2.3",
     "wait-on": "^4.0.2"
   }
