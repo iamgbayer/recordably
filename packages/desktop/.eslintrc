@@ -5,7 +5,12 @@
     "es6": true,
     "jest": true
   },
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -13,7 +18,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "indent": ["error", 2],
     "react/jsx-uses-vars": 1,

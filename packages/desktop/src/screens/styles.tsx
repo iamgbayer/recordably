@@ -8,14 +8,23 @@ export const Container = styled.div`
   position: relative;
 `
 
-export const Overlay = styled.div.attrs(({ width, height, top, left }) => ({
-  style: {
-    width: equals(width, 'full') ? '100%' : width + 'px',
-    height: equals(height, 'full') ? '100%' : height + 'px',
-    top: top + 'px',
-    left: left + 'px'
-  }
-}))`
+type Props = {
+  width: number | string
+  height: number | string
+  top: number
+  left: number
+}
+
+export const Overlay = styled.div.attrs<Props>(
+  ({ width, height, top, left }: Props) => ({
+    style: {
+      width: equals(width, 'full') ? '100%' : width + 'px',
+      height: equals(height, 'full') ? '100%' : height + 'px',
+      top: top + 'px',
+      left: left + 'px'
+    }
+  })
+)<Props>`
   position: absolute;
   z-index: 1;
   background: rgba(0, 0, 0, 0.4);
@@ -37,7 +46,7 @@ export const Controls = styled.div`
 
 export const Control = styled.button``
 
-export const style = (hasInitiatedResize) => ({
+export const style = (hasInitiatedResize: boolean) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',

@@ -7,24 +7,33 @@ import {
 import { useFrames, useTakeScreenshot } from 'hooks'
 import { equals, includes, isNil, merge, path, prop } from 'ramda'
 import React, { useEffect, useRef, useState } from 'react'
-import { Rnd } from 'react-rnd'
+import { Rnd, RndResizeCallback } from 'react-rnd'
 import { Container, Control, Controls, Meta, Overlay, style } from './styles'
 
 const { ipcRenderer, remote } = window.require('electron')
 const { setIgnoreMouseEvents } = remote.getCurrentWindow()
 
+export type MetaProperties = {
+  width: number
+  height: number
+  x: number
+  y: number
+}
+
 export const Area = () => {
   const [hasInitiatedResize, setHasInitiatedResize] = useState(false)
-  const [meta, setMeta] = useState({
+  const [meta, setMeta] = useState<MetaProperties>({
     width: 10,
-    height: 10
+    height: 10,
+    x: 0,
+    y: 0
   })
 
-  const rnd = useRef()
+  const rnd = useRef<Rnd>(null)
   const canUpdatePosition = useRef(true)
 
   const minimize = () => {
-    rnd.current.updateSize({
+    rnd.current?.updateSize({
       width: 10,
       height: 10
     })
@@ -46,7 +55,7 @@ export const Area = () => {
   useEffect(() => {
     window.addEventListener('mousemove', (event) => {
       canUpdatePosition.current &&
-        rnd.current.updatePosition({
+        rnd.current?.updatePosition({
           x: event.clientX - 15,
           y: event.clientY - 15
         })
@@ -57,7 +66,7 @@ export const Area = () => {
    * @todo Move to App.js
    */
   useEffect(() => {
-    const whenEscPressedHideApplication = (event) => {
+    const whenEscPressedHideApplication = (event: KeyboardEvent) => {
       equals(event.key, 'Escape') && minimize()
     }
 
@@ -82,7 +91,7 @@ export const Area = () => {
     finish()
   }
 
-  const onCantUpdatePosition = (event, direction, ref) => {
+  const onCantUpdatePosition: RndResizeCallback = (_event, _direction, ref) => {
     canUpdatePosition.current = false
 
     if (isNil(ref)) {
@@ -91,8 +100,8 @@ export const Area = () => {
 
     setMeta((meta) =>
       merge(meta, {
-        width: pixelToInteger(path(['style', 'width'], ref)),
-        height: pixelToInteger(path(['style', 'height'], ref))
+        width: pixelToInteger(path(['style', 'width'], ref) as string),
+        height: pixelToInteger(path(['style', 'height'], ref) as string)
       })
     )
   }
@@ -117,19 +126,20 @@ export const Area = () => {
     <Container>
       <Rnd
         ref={rnd}
-        onResize={(event, direction, ref, delta, position) =>
+        onResize={(_event, _direction, ref, _delta, position) =>
           setMeta({
-            width: pixelToInteger(path(['style', 'width'], ref)),
-            height: pixelToInteger(path(['style', 'height'], ref)),
+            width: pixelToInteger(path(['style', 'width'], ref) as string),
+            height: pixelToInteger(path(['style', 'height'], ref) as string),
             x: position.x,
             y: position.y
           })
         }
         onResizeStart={() => {
           setHasInitiatedResize(true)
-          onCantUpdatePosition()
+
+          canUpdatePosition.current = false
         }}
-        onDragStop={(event, direction) =>
+        onDragStop={(_event, direction) =>
           setMeta((meta) =>
             merge(meta, {
               x: direction.x,
@@ -139,10 +149,12 @@ export const Area = () => {
         }
         onResizeStop={onCantUpdatePosition}
         bounds="parent"
-        style={style(hasInitiatedResize)}
+        style={style(hasInitiatedResize) as React.CSSProperties}
         default={{
           width: 10,
-          height: 10
+          height: 10,
+          x: 0,
+          y: 0
         }}
       >
         {hasInitiatedResize && (
