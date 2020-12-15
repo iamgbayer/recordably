@@ -2,17 +2,20 @@ import dayjs from 'dayjs'
 import { isNil, prop, propEq } from 'ramda'
 const { remote, desktopCapturer } = window.require('electron')
 
-export const createFolderName = () => dayjs().format('yyyy-MM-dd@HH-mm-ss')
+export const createFolderName = (): string =>
+  dayjs().format('yyyy-MM-dd@HH-mm-ss')
 
 export const pixelToInteger = (string: string): number =>
   parseInt(string.replace(/px/, ''))
 
-export const wait = () =>
-  new Promise((resolve) => {
+type ResolveNullable = (value?: unknown) => void
+
+export const wait = (): Promise<void> =>
+  new Promise((resolve: ResolveNullable) => {
     setTimeout(() => {
-      resolve('')
+      resolve()
     }, 500)
-  })
+  }) as Promise<void>
 
 type CurrentDisplayProperties = {
   id: string
@@ -62,7 +65,7 @@ type Source = {
 
 export const getSourceAndUserMedia = (
   execute: (stream: MediaStream) => void
-) => {
+): void => {
   const { id, size } = getIdAndSizeCurrentDisplay()
 
   try {

@@ -109,14 +109,14 @@ export const Area = () => {
   /**
    * @todo Move to App.js
    */
-  const listenMouseEvents = () =>
+  const listenMouseEvents = (): void =>
     includes(status, [STATUS.recording, STATUS.initial]) &&
     setIgnoreMouseEvents(false)
 
   /**
    * @todo Move to App.js
    */
-  const removeListenMouseEvents = () =>
+  const removeListenMouseEvents = (): void =>
     includes(status, [STATUS.recording]) &&
     setIgnoreMouseEvents(true, { forward: true })
 
