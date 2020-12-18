@@ -8,7 +8,7 @@ export const createFolderName = (): string =>
 export const pixelToInteger = (string: string): number =>
   parseInt(string.replace(/px/, ''))
 
-type ResolveNullable = (value?: unknown) => void
+export type ResolveNullable = (value?: unknown) => void
 
 export const wait = (): Promise<void> =>
   new Promise((resolve: ResolveNullable) => {

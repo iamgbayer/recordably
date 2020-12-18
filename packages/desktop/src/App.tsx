@@ -1,4 +1,4 @@
 import React from 'react'
 import { Area } from 'screens'
 
-export const App = () => <Area />
+export const App = (): React.ReactElement => <Area />

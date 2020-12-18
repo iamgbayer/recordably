@@ -20,7 +20,7 @@ export type MetaProperties = {
   y: number
 }
 
-export const Area = () => {
+export const Area = (): React.ReactElement => {
   const [hasInitiatedResize, setHasInitiatedResize] = useState(false)
   const [meta, setMeta] = useState<MetaProperties>({
     width: 10,

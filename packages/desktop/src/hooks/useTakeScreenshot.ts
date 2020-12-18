@@ -1,32 +1,47 @@
 import { IMAGE_TYPE, VIDEO_CSS } from 'configs'
 import jimp from 'jimp'
+import { isNil } from 'ramda'
 import { useRef } from 'react'
+import { MetaProperties } from 'screens'
 
-export const useTakeScreenshot = ({ meta, minimize }) => {
-  const video = useRef(null)
+type Dependencies = {
+  meta: MetaProperties
+  minimize: () => void
+}
 
-  const execute = (stream) => {
+type Return = (stream: MediaStream) => void
+
+export const useTakeScreenshot = ({ meta, minimize }: Dependencies): Return => {
+  const video = useRef<HTMLVideoElement>(document.createElement('video'))
+
+  const execute = (stream: MediaStream) => {
+    const { width, height, x, y } = meta
+
     video.current = document.createElement('video')
     video.current.style.cssText = VIDEO_CSS
 
+    if (isNil(video.current)) {
+      return
+    }
+
     video.current.onloadedmetadata = function () {
-      video.current.style.height = this.videoHeight + 'px'
-      video.current.style.width = this.videoWidth + 'px'
+      video.current.style.height = `${height}px`
+      video.current.style.width = `${width}px`
 
       video.current.play()
 
       const canvas = document.createElement('canvas')
-      canvas.width = this.videoWidth
-      canvas.height = this.videoHeight
+      canvas.width = width
+      canvas.height = height
 
-      const context = canvas.getContext('2d')
+      const context = canvas.getContext('2d') as CanvasRenderingContext2D
       context.drawImage(video.current, 0, 0, canvas.width, canvas.height)
 
       const base64 = canvas.toDataURL(IMAGE_TYPE)
 
       video.current.remove()
 
-      const encondedImageBuffer = new Buffer(
+      const encodedImageBuffer = new Buffer(
         base64.replace(/^data:image\/(png|gif|jpeg);base64,/, ''),
         'base64'
       )
@@ -34,12 +49,10 @@ export const useTakeScreenshot = ({ meta, minimize }) => {
       /**
        * @todo We could remove jimp and just do it with canvas.
        */
-      jimp.read(encondedImageBuffer, (error, image) => {
+      jimp.read(encodedImageBuffer, (error, image) => {
         if (error) {
           throw error
         }
-
-        const { width, height, x, y } = meta
 
         image
           .crop(x, y, width, height)

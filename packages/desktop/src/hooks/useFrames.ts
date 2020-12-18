@@ -1,31 +1,47 @@
 import { FRAME_RATE, IMAGE_TYPE, MAX_LENGTH, VIDEO_CSS } from 'configs'
 import GIFEncoder from 'gif-encoder-2'
+import { ResolveNullable } from 'helpers'
 import { isNil, prop } from 'ramda'
 import { useRef, useState } from 'react'
+import { MetaProperties } from 'screens'
 
 const { remote } = window.require('electron')
 const fs = window.require('fs')
 const { dialog, app } = remote
 
-export const useFrames = ({ meta, minimize }) => {
-  const [frames, setFrames] = useState([])
+type Dependencies = {
+  meta: MetaProperties
+  minimize: () => void
+}
+
+type Return = {
+  start: (stream: MediaStream) => void
+  finish: () => Promise<void>
+}
+
+type DialogProps = {
+  filePath: string | null
+}
+
+type ContextNullable = CanvasRenderingContext2D | null
+
+export const useFrames = ({ meta, minimize }: Dependencies): Return => {
+  const [frames, setFrames] = useState<Array<string>>([])
   // eslint-disable-next-line no-unused-vars
   const [timeLimit, setTimeLimit] = useState(MAX_LENGTH)
 
-  const video = useRef(null)
-  const captureInterval = useRef(null)
-  const context = useRef(null)
-  const canvas = useRef(null)
-  const timeout = useRef(null)
+  const video = useRef<HTMLVideoElement>(document.createElement('video'))
+  const canvas = useRef<HTMLCanvasElement>(document.createElement('canvas'))
+  const context = useRef<ContextNullable>(null)
+  const timeout = useRef<number>(0)
+  const captureInterval = useRef<number>(0)
 
-  const start = (stream) => {
-    canvas.current = document.createElement('canvas')
-
+  const start = (stream: MediaStream) => {
     context.current = canvas.current.getContext('2d')
+
     canvas.current.width = prop('width', meta)
     canvas.current.height = prop('height', meta)
 
-    video.current = document.createElement('video')
     video.current.style.cssText = VIDEO_CSS
     video.current.srcObject = stream
     document.body.appendChild(video.current)
@@ -44,6 +60,17 @@ export const useFrames = ({ meta, minimize }) => {
   const onCaptureFrame = () => {
     const { width, height, x, y } = meta
 
+    /**
+     * @todo
+     */
+    if (
+      isNil(video.current) ||
+      isNil(context.current) ||
+      isNil(canvas.current)
+    ) {
+      return
+    }
+
     context.current.drawImage(
       video.current,
       x,
@@ -56,16 +83,22 @@ export const useFrames = ({ meta, minimize }) => {
       height
     )
 
-    let frame = canvas.current.toDataURL(IMAGE_TYPE)
+    const frame = canvas.current.toDataURL(IMAGE_TYPE) as string
 
     setFrames((frames) => [...frames, frame])
   }
 
   const finish = async () => {
-    const { width, height } = meta
+    if (isNil(video.current)) {
+      return
+    }
+
     minimize()
 
+    const { width, height } = meta
+
     video.current.pause()
+
     clearInterval(captureInterval.current)
     clearInterval(timeout.current)
 
@@ -73,13 +106,13 @@ export const useFrames = ({ meta, minimize }) => {
     canvas.width = width
     canvas.height = height
 
-    const ctx = canvas.getContext('2d')
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
 
     const encoder = new GIFEncoder(width, height)
     encoder.start()
 
-    const process = async (frame) => {
-      return new Promise((resolve) => {
+    const process = async (frame: string) => {
+      return new Promise((resolve: ResolveNullable) => {
         const image = new Image()
 
         image.onload = () => {
@@ -93,7 +126,7 @@ export const useFrames = ({ meta, minimize }) => {
       })
     }
 
-    for (let frame of frames) {
+    for (const frame of frames) {
       await process(frame)
     }
 
@@ -110,7 +143,7 @@ export const useFrames = ({ meta, minimize }) => {
 
     setFrames([])
 
-    dialog.showSaveDialog(options).then(({ filePath }) => {
+    dialog.showSaveDialog(options).then(({ filePath }: DialogProps) => {
       if (isNil(filePath)) {
         return
       }

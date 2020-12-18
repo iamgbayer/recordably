@@ -46,7 +46,9 @@ export const Controls = styled.div`
 
 export const Control = styled.button``
 
-export const style = (hasInitiatedResize: boolean) => ({
+export const style = (
+  hasInitiatedResize: boolean
+): Record<string, unknown> => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
