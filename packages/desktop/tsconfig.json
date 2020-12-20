@@ -17,5 +17,6 @@
     "jsx": "react-jsx",
     "baseUrl": "src"
   },
-  "include": ["src", "src/index.d.ts"]
+  "include": ["src", "index.d.ts"],
+  "files": ["src/index.d.ts"]
 }

@@ -1,7 +1,15 @@
+declare module 'gif-encoder-2'
 
-type Arguments {
-
+declare let ClipboardItem: {
+  prototype: ClipboardItem
+  new (objects: Record<string, Blob>): ClipboardItem
 }
-declare module 'gif-encoder-2' {
-  GIFEncoder(Arguments)
+
+interface Clipboard {
+  write(items: Array<ClipboardItem>): Promise<void>
+}
+
+interface GlobalEventHandlers {
+  videoWidth: number
+  videoHeight: number
 }

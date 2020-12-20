@@ -31,8 +31,8 @@ export const useTakeScreenshot = ({ meta, minimize }: Dependencies): Return => {
       video.current.play()
 
       const canvas = document.createElement('canvas')
-      canvas.width = width
-      canvas.height = height
+      canvas.width = this.videoWidth
+      canvas.height = this.videoHeight
 
       const context = canvas.getContext('2d') as CanvasRenderingContext2D
       context.drawImage(video.current, 0, 0, canvas.width, canvas.height)
@@ -60,7 +60,7 @@ export const useTakeScreenshot = ({ meta, minimize }: Dependencies): Return => {
             fetch(base64data)
               .then((response) => response.blob())
               .then(async (blob) => {
-                const item = new window.ClipboardItem({
+                const item = new ClipboardItem({
                   [IMAGE_TYPE]: blob
                 })
 

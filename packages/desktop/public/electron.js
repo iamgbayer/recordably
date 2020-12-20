@@ -46,9 +46,10 @@ const createWindow = () => {
   window = new BrowserWindow({
     transparent: true,
     frame: false,
+    width: 1920,
+    height: 1080,
     resizable: false,
     alwaysOnTop: true,
-    fullscreen: true,
     webPreferences: { nodeIntegration: true }
   })
 

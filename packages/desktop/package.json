@@ -82,7 +82,7 @@
   "main": "build/electron.js",
   "homepage": "./",
   "scripts": {
-    "start": "concurrently \"cross-env PORT=3006 BROWSER=none react-scripts start\" \"wait-on http://localhost:3006 && electron .\"",
+    "start": "concurrently \"cross-env PORT=3006 BROWSER=none react-scripts start\" \"wait-on http://localhost:3006 && electron --enable-transparent-visuals .\"",
     "build": "react-scripts build && yarn electron-builder",
     "test": "react-scripts test"
   },

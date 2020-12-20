@@ -1,4 +1,3 @@
-import { equals } from 'ramda'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -8,29 +7,7 @@ export const Container = styled.div`
   position: relative;
 `
 
-type Props = {
-  width: number | string
-  height: number | string
-  top: number
-  left: number
-}
-
-export const Overlay = styled.div.attrs<Props>(
-  ({ width, height, top, left }: Props) => ({
-    style: {
-      width: equals(width, 'full') ? '100%' : width + 'px',
-      height: equals(height, 'full') ? '100%' : height + 'px',
-      top: top + 'px',
-      left: left + 'px'
-    }
-  })
-)<Props>`
-  position: absolute;
-  z-index: 1;
-  background: rgba(0, 0, 0, 0.4);
-`
-
-export const Meta = styled.div`
+export const Size = styled.div`
   position: absolute;
   top: -20px;
   left: 0;
@@ -54,5 +31,5 @@ export const style = (
   justifyContent: 'center',
   position: 'relative',
   zIndex: 50,
-  border: `dashed 1px ${hasInitiatedResize ? 'white' : 'transparent'}`
+  border: `dashed 1px ${hasInitiatedResize ? '#fff' : 'transparent'}`
 })
