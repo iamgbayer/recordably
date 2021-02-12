@@ -47,7 +47,7 @@ export const useTakeScreenshot = ({ meta, minimize }: Dependencies): Return => {
       )
 
       /**
-       * @todo We could remove jimp and just do it with canvas.
+       * @todo We could remove jimp and just make it with canvas.
        */
       jimp.read(encodedImageBuffer, (error, image) => {
         if (error) {

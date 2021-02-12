@@ -3,6 +3,7 @@ import { equals, prop } from 'ramda'
 import React from 'react'
 import { MetaProperties } from 'screens'
 import styled from 'styled-components'
+import { Tokens } from './Tokens'
 
 type OverlayProps = {
   width: number | string
@@ -23,7 +24,7 @@ const Overlay = styled.div.attrs<OverlayProps>(
 )<OverlayProps>`
   position: absolute;
   z-index: 1;
-  background: rgba(0, 0, 0, 0.5);
+  background: ${Tokens.colors[300]};
 `
 
 type Props = {

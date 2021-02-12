@@ -52,9 +52,10 @@ export const useFrames = ({ meta, minimize }: Dependencies): Return => {
       Math.round(1000 / FRAME_RATE)
     )
 
-    timeout.current = setInterval(() => {
-      setTimeLimit((cur) => cur - 1000)
-    }, 1000)
+    timeout.current = setInterval(
+      () => setTimeLimit((limit) => limit - 1000),
+      1000
+    )
   }
 
   const onCaptureFrame = () => {
