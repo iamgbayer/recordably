@@ -1,7 +1,7 @@
 {
   "name": "@recordably/desktop",
   "description": "An open-source, minimalist, screenshot and screen GIF recorder built with web technology.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "repository": {
     "type": "git",
