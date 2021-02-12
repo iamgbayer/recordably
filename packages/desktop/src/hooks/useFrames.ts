@@ -27,7 +27,7 @@ type ContextNullable = CanvasRenderingContext2D | null
 
 export const useFrames = ({ meta, minimize }: Dependencies): Return => {
   const [frames, setFrames] = useState<Array<string>>([])
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [timeLimit, setTimeLimit] = useState(MAX_LENGTH)
 
   const video = useRef<HTMLVideoElement>(document.createElement('video'))
