@@ -10,9 +10,13 @@ export const Container = styled.div`
 
 export const Size = styled.div`
   position: absolute;
-  top: -20px;
-  color: ${Tokens.colors[100]};
+  top: -35px;
+  color: ${Tokens.colors[200]};
   left: 0;
+  background: ${Tokens.colors[100]};
+  border-radius: 5px;
+  padding: 6px;
+  width: max-content;
 `
 
 export const Controls = styled.div`
@@ -23,15 +27,9 @@ export const Controls = styled.div`
   bottom: -40px;
   border-radius: 5px;
   padding: 0 6px;
-  background: ${Tokens.colors[200]};
+  background: ${Tokens.colors[100]};
   display: flex;
   justify-content: space-between;
-`
-
-export const Select = styled.div`
-  white-space: nowrap;
-  color: ${Tokens.colors[100]};
-  margin-bottom: 20px;
 `
 
 export const Control = styled.button`

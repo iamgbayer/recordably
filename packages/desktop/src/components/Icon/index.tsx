@@ -34,7 +34,7 @@ const Container = styled.div`
 `
 
 export const Icon = memo(
-  ({ name, color = 100, width = 20, height = 20, ...props }: Props) => {
+  ({ name, color = 200, width = 20, height = 20, ...props }: Props) => {
     const Iconable: React.FC<{
       width: number
       height: number

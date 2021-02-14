@@ -5,7 +5,7 @@ import { useFrames, useTakeScreenshot } from 'hooks'
 import { equals, includes, isNil, merge, not, path, prop } from 'ramda'
 import React, { useEffect, useRef, useState } from 'react'
 import { Rnd, RndResizeCallback } from 'react-rnd'
-import { Container, Control, Controls, Size, style, Select } from './styles'
+import { Container, Control, Controls, Size, style } from './styles'
 
 const { ipcRenderer, remote } = window.require('electron')
 const { setIgnoreMouseEvents } = remote.getCurrentWindow()
@@ -165,7 +165,7 @@ export const Area = (): React.ReactElement => {
           y: 0
         }}
       >
-        {not(hasInitiatedResize) && <Select>Select an area</Select>}
+        {not(hasInitiatedResize) && <Size>Select an area</Size>}
 
         {hasInitiatedResize && (
           <>

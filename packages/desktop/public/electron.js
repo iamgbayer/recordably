@@ -2,15 +2,7 @@ const electron = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
 
-const {
-  app,
-  Tray,
-  Menu,
-  globalShortcut,
-  ipcMain,
-  nativeImage,
-  remote
-} = electron
+const { app, Tray, Menu, globalShortcut, ipcMain, nativeImage } = electron
 
 const BrowserWindow = electron.BrowserWindow
 
@@ -54,11 +46,14 @@ const createWindow = () => {
   window = new BrowserWindow({
     transparent: true,
     frame: false,
-    width: 1920,
-    height: 1080,
     resizable: false,
+    skipTaskbar: true,
+    kiosk: true,
+    fullscreen: true,
     alwaysOnTop: true,
-    webPreferences: { nodeIntegration: true }
+    webPreferences: {
+      nodeIntegration: true
+    }
   })
 
   window.setMenuBarVisibility(false)
