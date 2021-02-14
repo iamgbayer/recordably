@@ -16,11 +16,16 @@ export const Size = styled.div`
 `
 
 export const Controls = styled.div`
-  width: max-content;
+  width: 90px;
   height: max-content;
   position: absolute;
   right: 0;
-  bottom: -20px;
+  bottom: -40px;
+  border-radius: 5px;
+  padding: 0 6px;
+  background: ${Tokens.colors[200]};
+  display: flex;
+  justify-content: space-between;
 `
 
 export const Select = styled.div`
@@ -29,7 +34,12 @@ export const Select = styled.div`
   margin-bottom: 20px;
 `
 
-export const Control = styled.button``
+export const Control = styled.button`
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+`
 
 export const style = (
   hasInitiatedResize: boolean

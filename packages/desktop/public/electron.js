@@ -2,7 +2,15 @@ const electron = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
 
-const { app, Tray, Menu, globalShortcut, ipcMain, nativeImage } = electron
+const {
+  app,
+  Tray,
+  Menu,
+  globalShortcut,
+  ipcMain,
+  nativeImage,
+  remote
+} = electron
 
 const BrowserWindow = electron.BrowserWindow
 

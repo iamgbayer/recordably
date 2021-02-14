@@ -19,7 +19,6 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-rnd": "^8.0.0",
     "@types/styled-components": "^5.1.5",
-    "blob-to-buffer": "^1.2.8",
     "cross-env": "^7.0.2",
     "dayjs": "^1.9.7",
     "electron-is-dev": "^1.2.0",

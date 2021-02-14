@@ -1,4 +1,4 @@
-import { Overlays } from 'components/Overlays'
+import { Overlays, Icon } from 'components'
 import { STATUS } from 'configs'
 import { getSourceAndUserMedia, pixelToInteger } from 'helpers'
 import { useFrames, useTakeScreenshot } from 'hooks'
@@ -177,8 +177,14 @@ export const Area = (): React.ReactElement => {
               onMouseEnter={listenMouseEvents}
               onMouseLeave={removeListenMouseEvents}
             >
-              <Control onClick={minimize}>close</Control>
-              <Control onClick={onTakeScreenshot}>screenshot</Control>
+              <Control onClick={minimize}>
+                <Icon name="close" />
+              </Control>
+
+              <Control onClick={onTakeScreenshot}>
+                <Icon name="camera" width={18} height={18} />
+              </Control>
+
               <Control
                 onClick={
                   equals(STATUS.recording, status)
@@ -186,7 +192,11 @@ export const Area = (): React.ReactElement => {
                     : onStartRecordFrames
                 }
               >
-                {equals(STATUS.recording, status) ? 'finish' : 'record'}
+                {equals(STATUS.recording, status) ? (
+                  'finish'
+                ) : (
+                  <Icon name="gif" width={35} height={35} />
+                )}
               </Control>
             </Controls>
           </>
