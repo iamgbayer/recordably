@@ -7,8 +7,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Rnd, RndResizeCallback } from 'react-rnd'
 import { Container, Control, Controls, Size, style } from './styles'
 
-const { ipcRenderer, remote } = window.require('electron')
-const { setIgnoreMouseEvents } = remote.getCurrentWindow()
+const { ipcRenderer } = window.require('electron')
+const { getCurrentWindow } = window.require('@electron/remote')
+
+const { setIgnoreMouseEvents } = getCurrentWindow()
 
 export type MetaProperties = {
   width: number
@@ -49,7 +51,7 @@ export const Area = (): React.ReactElement => {
       height: 10
     })
 
-    setTimeout(() => ipcRenderer.send('minimize'), 0)
+    setTimeout(() => ipcRenderer.send('minimize'), 10)
   }
 
   const takeScreenshot = useTakeScreenshot({ meta, minimize })

@@ -5,9 +5,8 @@ import { isNil, prop } from 'ramda'
 import { useRef, useState } from 'react'
 import { MetaProperties } from 'screens'
 
-const { remote } = window.require('electron')
+const { dialog, app } = window.require('@electron/remote')
 const fs = window.require('fs')
-const { dialog, app } = remote
 
 type Dependencies = {
   meta: MetaProperties

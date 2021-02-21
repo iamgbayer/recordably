@@ -1,3 +1,5 @@
+require('@electron/remote/main').initialize()
+
 const electron = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
@@ -52,7 +54,8 @@ const createWindow = () => {
     fullscreen: true,
     alwaysOnTop: true,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      enableRemoteModule: true
     }
   })
 

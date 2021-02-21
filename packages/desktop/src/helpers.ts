@@ -1,6 +1,8 @@
 import dayjs from 'dayjs'
 import { isNil, prop, propEq } from 'ramda'
-const { remote, desktopCapturer } = window.require('electron')
+
+const { desktopCapturer } = window.require('electron')
+const { screen } = window.require('@electron/remote')
 
 export const createFolderName = (): string =>
   dayjs().format('yyyy-MM-dd@HH-mm-ss')
@@ -26,8 +28,6 @@ type CurrentDisplayProperties = {
 }
 
 export const getIdAndSizeCurrentDisplay = (): CurrentDisplayProperties => {
-  const { screen } = remote
-
   const cursor = screen.getCursorScreenPoint()
   const { id, size } = screen.getDisplayNearestPoint({
     x: cursor.x,
