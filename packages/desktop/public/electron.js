@@ -3,13 +3,17 @@ require('@electron/remote/main').initialize()
 const electron = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
+const os = require('os')
 
 const { app, Tray, Menu, globalShortcut, ipcMain, nativeImage } = electron
 
 const BrowserWindow = electron.BrowserWindow
+const osType = os.type()
 
 let window
 let tray
+
+osType === 'Linux' && app.disableHardwareAcceleration()
 
 const createTray = () => {
   const trayIcon = path.join(__dirname, '../icons/icon.png')
@@ -74,10 +78,12 @@ const createWindow = () => {
 
 ipcMain.on('minimize', () => window.hide())
 
-app.on('ready', () => {
-  createWindow()
-  createTray()
-})
+app.on('ready', () =>
+  setTimeout(() => {
+    createWindow()
+    createTray()
+  }, 400)
+)
 
 app.on('window-all-closed', () => {
   process.platform !== 'darwin' && app.quit()
